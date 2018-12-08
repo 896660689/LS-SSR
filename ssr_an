@@ -24,7 +24,7 @@ if [ "$Function_options" == "1" ]; then
 		else
 			echo -e "\e[1;34m 下载 SSR 脚本文件开始安装 \e[0m\n"
 			#wget --no-check-certificate https://github.com/896660689/LS-SSR/blob/master/SSR_Mproxy_Pdnsd-1812C.tar.bz2 -O /tmp/SSR.tar.bz2
-			wget --no-check-certificate -t 15 -T 50 https://github.com/896660689/LS-SSR/blob/master/SSR_Mproxy_Pdnsd-1812C.tar.bz2 -O /tmp/SSR.tar.bz2 && sleep 2
+			wget --no-check-certificate -t 15 -T 50 https://raw.githubusercontent.com/896660689/LS-SSR/master/SSR_Mproxy_Pdnsd-1812C.tar.bz2 -O /tmp/SSR.tar.bz2 && sleep 2
 			tar -xjvf /tmp/SSR.tar.bz2 -C /etc && sleep 1
 		fi
 		sh /etc/storage/shadowsocksr/ssr_install
