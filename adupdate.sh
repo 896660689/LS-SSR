@@ -42,6 +42,7 @@ judge_update(){
 }
 
 download_lazy(){
+
 	wget -q -c -P $tmpdir 'https://coding.net/u/adbyby/p/xwhyc-rules/git/raw/master/lazy.txt'
 		if [ "$?"x != "0"x ]; then
 			logger -t "${logger_title}" "【lazy】下载coding中的规则失败，尝试下载github中的规则"
@@ -76,6 +77,7 @@ download_video(){
 }
 
 # check_rules()
+
 	rm_cache
 	mkdir $tmpdir
 	logger -t "${logger_title}" "自动检测规则更新中" && cd $tmpdir
@@ -89,8 +91,8 @@ download_video(){
 			lazy_online=$(sed  's/":"/\n/g' md5.json  |  sed  's/","/\n/g' | sed -n '2p')
 			video_online=$(sed  's/":"/\n/g' md5.json  |  sed  's/","/\n/g' | sed -n '4p')
 			logger -t "${logger_title}"  "获取在线规则MD5成功，正在判断是否有更新中"
-			#sed -i "s/=video,lazy/=none/g" $adbybydir/adhook.ini
-			#sed -i "s/=video,lazy/=none/g" $adbybydir/adhook.sample.ini
+			# sed -i "s/=video,lazy/=none/g" /etc/storage/adb/adhook.ini
+			# sed -i "s/=video,lazy/=none/g" /etc/storage/adb/adhook.sample.ini
 			judge_update
 		fi
 	exit 0 
