@@ -11,9 +11,12 @@ if [ ! -d "/etc/storage/adb" ]; then
 	mkdir -p -m 777 /etc/storage/adb
 fi
 
-if [ ! -d "$adbyby_data" ]; then
-	echo -e "\e[1;36m 创建 'gfwlist' 文件夹 \e[0m\n"
+if [ ! -d "/etc/storage/adb/data" ]; then
 	mkdir -p -m 755 /etc/storage/adb/data
+fi
+
+if [ ! -d "/etc/storage/adb/data/video" ]; then
+	mkdir -p -m 755 /etc/storage/adb/data/video
 fi
 
 if [ -f $adbyby_plus ]
