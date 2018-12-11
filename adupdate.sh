@@ -81,8 +81,10 @@ download_video(){
 	rm_cache
 	mkdir $tmpdir
 	logger -t "${logger_title}" "自动检测规则更新中" && cd $tmpdir
-	md5sum etc $adbyby_data/lazy.txt $adbyby_data/video.txt > local-md5.json
-	wget -q -c -P $tmpdir 'https://coding.net/u/adbyby/p/xwhyc-rules/git/raw/master/md5.json'
+	
+	md5sum $adbyby_data/lazy.txt $adbyby_data/video.txt > local-md5.json
+	wget-ssl --no-check-certificate https://coding.net/u/adbyby/p/xwhyc-rules/git/raw/master/md5.json
+	#wget -q -c -P $tmpdir 'https://coding.net/u/adbyby/p/xwhyc-rules/git/raw/master/md5.json'
 		if [ "$?"x != "0"x ]; then
 			logger -t "${logger_title}" "获取在线规则时间失败" && exit 0     
 		else
@@ -95,4 +97,4 @@ download_video(){
 			# sed -i "s/=video,lazy/=none/g" /etc/storage/adb/adhook.sample.ini
 			judge_update
 		fi
-	exit 0 
+		
