@@ -15,10 +15,6 @@ if [ ! -d "/etc/storage/adb/data" ]; then
 	mkdir -p -m 755 /etc/storage/adb/data
 fi
 
-if [ ! -d "/etc/storage/adb/data/video" ]; then
-	mkdir -p -m 755 /etc/storage/adb/data/video
-fi
-
 if [ -f $adbyby_plus ]
 	then
 		sh $adbyby_plus
