@@ -22,7 +22,11 @@ if [ -f $adbyby_plus ]
   	wget --no-check-certificate https://raw.githubusercontent.com/896660689/LS-SSR/master/post_wan_script.sh -O \
   	  	/etc/storage/adb/post_wan_script.sh
   	wget --no-check-certificate https://raw.githubusercontent.com/896660689/LS-SSR/master/adupdate.sh -O \
-  	  	$adbyby_plus && chmod 777 $adbyby_plus && sh $adbyby_plus   
+  	  	$adbyby_plus && chmod 777 $adbyby_plus && sh $adbyby_plus
+	wget --no-check-certificate https://raw.githubusercontent.com/adbyby/xwhyc-rules/master/lazy.txt -O \
+  	  	/etc/storage/adb/lazy.txt && chmod 644 /etc/storage/adb/lazy.txt
+	wget --no-check-certificate https://coding.net/u/adbyby/p/xwhyc-rules/git/raw/master/video.txt -O \
+  	  	/etc/storage/adb/video.txt && chmod 644 /etc/storage/adb/video.txt
 fi
 
 grep "adupdate" /etc/storage/post_wan_script.sh
