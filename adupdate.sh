@@ -94,7 +94,7 @@ download_video(){
 
 	logger -t "${logger_title}" "自动检测规则更新中" && cd $tmpdir
 		if [ ! -f $tmpdir/video.txt ]; then
-		wget --no-check-certificate https://raw.githubusercontent.com/adbyby/xwhyc-rules/master/lazy.txt -O $tmpdir/video.txt;chmod 775 $tmpdir/video.txt
+		wget --no-check-certificate https://raw.githubusercontent.com/adbyby/xwhyc-rules/master/video.txt -O $tmpdir/video.txt;chmod 775 $tmpdir/video.txt
 		cat $tmpdir/video.txt $adbyby_data/video.txt | awk '{ print$0}' | sort | uniq -u > $tmpdir/lazy_1.txt && sleep 2
 		if [ ! -s "/tmp/hsfq_script_up.txt" ]; then
 			echo -e "\e[1;33m video 规则已为最新,无需更新.\e[0m\n" && rm -f $tmpdir/video.txt && rm -f $adbyby_data/video_1.txt
