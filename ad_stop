@@ -1,0 +1,16 @@
+#!/bin/sh
+# Compile:by-lanse	2018-12-28
+
+port=$(iptables -t nat -L | grep 'ports 8118' | wc -l)
+    logger -t "adbyby" "找到$port个8118透明代理端口，正在关闭。"
+    while [[ "$port" -ge 1 ]]
+    do
+    iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8118
+    port=$(iptables -t nat -L | grep 'ports 8118' | wc -l)
+    done
+	logger -t "adbyby" "已关闭全部8118透明代理端口。"
+killall adbyby
+sed -i '/adbyby/d' /etc/storage/post_wan_script.sh
+logger -t "adbyby" "adbyby进程已成功关闭。"
+sed -i '/adbchk/d' /etc/storage/cron/crontabs/$http_username
+rm -rf /tmp/tmp_adbb /tmp/tmp_adup /tmp/tmp_adan 
