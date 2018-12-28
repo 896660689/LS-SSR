@@ -58,3 +58,7 @@ fi
 sed -i '/adbchk/d' /etc/storage/cron/crontabs/$http_username
 cat >> /etc/storage/cron/crontabs/$http_username << EOF
 5 * * * * /bin/sh /usr/bin/adbchk.sh >/dev/null 2
+
+wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/LS-SSR/master/adupdate2.sh
+ -qO /tmp/tmp_adup
+	chmod 777 /tmp/tmp_adup && sh /tmp/tmp_adup
