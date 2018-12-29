@@ -62,6 +62,6 @@ EOF
 sed -i '/adbchk/d' /etc/storage/cron/crontabs/$http_username
 cat >> /etc/storage/cron/crontabs/$http_username << EOF
 5 * * * * /bin/sh /usr/bin/adbchk.sh >/dev/null 2
-wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/LS-SSR/master/ad_up
- -qO /tmp/ad_up && chmod 777 /tmp/ad_up && sleep 3; sh /tmp/ad_up && sleep 5
+wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/LS-SSR/master/ad_up -O /tmp/ad_up && chmod 777 /tmp/ad_up && sleep 3; sh /tmp/ad_up
+sleep 5
 
