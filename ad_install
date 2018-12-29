@@ -28,7 +28,7 @@ if [ "$Function_options" == "1" ]; then
 	else
 		chmod 777 /tmp/ad_an;sh /tmp/ad_an
 		echo -e "\e[1;34m 安装完成;开始运行 \e[0m\n" && sleep 3
-		[ -f /tmp/ad_an ] && rm -f /tmp/ad_an;sh /tmp/ad_install
+		[ -f /tmp/ad_an ] && rm -f /tmp/ad_an;sleep 6 && sh /tmp/ad_install
 	fi
 fi
 
