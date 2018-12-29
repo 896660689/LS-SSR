@@ -15,4 +15,4 @@ logger -t "adbyby" "adbyby进程已成功关闭。"
 
 sed -i '/adbchk/d' /etc/storage/cron/crontabs/$http_username
 [ -f /tmp/adbb ] && rm -f /tmp/adbb
-killall adbyby
+killall adbyby && sleep 3
