@@ -1,5 +1,6 @@
 #!/bin/sh
 # Compile:by-lanse	2018-12-28
+http_username=`nvram get http_username`
 
 port=$(iptables -t nat -L | grep 'ports 8118' | wc -l)
     logger -t "adbyby" "找到$port个8118透明代理端口，正在关闭。"
