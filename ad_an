@@ -55,10 +55,13 @@ iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8118
 logger -t "adbyby" "adbyby进程守护已启动。"
 fi
 fi
+sed -i '/adbyby/d' /etc/storage/post_wan_script.sh
+cat >> /etc/storage/post_wan_script.sh << EOF
+/usr/bin/adbyby.sh&
+EOF
 sed -i '/adbchk/d' /etc/storage/cron/crontabs/$http_username
 cat >> /etc/storage/cron/crontabs/$http_username << EOF
 5 * * * * /bin/sh /usr/bin/adbchk.sh >/dev/null 2
-
-wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/LS-SSR/master/adupdate2.sh
- -qO /tmp/tmp_adup
-	chmod 777 /tmp/tmp_adup && sh /tmp/tmp_adup
+wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/LS-SSR/master/ad_up
+ -qO /tmp/ad_up
+	chmod 777 /tmp/ad_up && sh /tmp/ad_up
