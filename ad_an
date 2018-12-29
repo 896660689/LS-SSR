@@ -19,12 +19,12 @@ port=$(iptables -t nat -L | grep 'ports 8118' | wc -l)
     done
 	logger -t "adbyby" "已关闭全部8118透明代理端口。"
 touch /tmp/cron_adb.lock
-killall adbyby
+
 sed -i '/adbyby/d' /etc/storage/post_wan_script.sh
 logger -t "adbyby" "adbyby进程已成功关闭。"
 sed -i '/adbchk/d' /etc/storage/cron/crontabs/$http_username
 mkdir -p "$adbybydir/adbb/"
-	tar -xzvf "/etc_ro/7620n.tar.gz" -C "$adbybydir/adbb/"
+	tar -xjvf "/etc_ro/7620n.tar.gz" -C "$adbybydir/adbb/"
 	logger -t "adbyby" "成功解压至：$adbybydir/adbb/"
 export PATH=/opt/sbin:/opt/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export LD_LIBRARY_PATH=/opt/lib:/lib
