@@ -11,21 +11,21 @@ koolproxyhttps=`nvram get koolproxy_https`
 http_username=`nvram get http_username`
 adbybydir="/tmp"
 port=$(iptables -t nat -L | grep 'ports 8118' | wc -l)
-    logger -t "adbyby" "找到$port个8118透明代理端口，正在关闭。"
-    while [[ "$port" -ge 1 ]]
-    do
-    iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8118
-    port=$(iptables -t nat -L | grep 'ports 8118' | wc -l)
-    done
-	logger -t "adbyby" "已关闭全部8118透明代理端口。"
+logger -t "adbyby" "找到$port个8118透明代理端口，正在关闭。"
+while [[ "$port" -ge 1 ]]
+do
+	iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8118
+	port=$(iptables -t nat -L | grep 'ports 8118' | wc -l)
+done
+logger -t "adbyby" "已关闭全部8118透明代理端口。"
 touch /tmp/cron_adb.lock
 
 sed -i '/adbyby/d' /etc/storage/post_wan_script.sh
 logger -t "adbyby" "adbyby进程已成功关闭。"
 sed -i '/adbchk/d' /etc/storage/cron/crontabs/$http_username
 mkdir -p "$adbybydir/adbb/"
-	tar -xjvf "/etc_ro/7620n.tar.gz" -C "$adbybydir/adbb/"
-	logger -t "adbyby" "成功解压至：$adbybydir/adbb/"
+tar -xjvf "/etc_ro/7620n.tar.gz" -C "$adbybydir/adbb/"
+logger -t "adbyby" "成功解压至：$adbybydir/adbb/"
 export PATH=/opt/sbin:/opt/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export LD_LIBRARY_PATH=/opt/lib:/lib
 sleep 2
@@ -37,31 +37,31 @@ if [ -s "$adbybydir/adbb/bin/adbyby" ] ;then
 		sed -Ei '/whitehost=/d' $adbybydir/adbb/bin/adhook.ini
 		echo whitehost=$adbyby_whost >> $adbybydir/adbb/bin/adhook.ini
 		echo @@\|http://\$domain=$(echo $adbyby_whost | tr , \|) >> $adbybydir/adbb/bin/data/user.txt
-		else
+	else
 		logger -t "adbyby" "过滤白名单地址未定义,已忽略。"
 	fi
-logger -t "adbyby" "正在启动adbyby进程。"
-chmod 777 "$adbybydir/adbb/bin/adbyby"
-$adbybydir/adbb/bin/adbyby&
-sleep 5
-check=$(ps | grep "$adbybydir/adbb/bin/adbyby" | grep -v "grep" | wc -l)
-if [ "$check" = 0 ]; then
-    logger -t "adbyby" "adbyby启动失败。"
-	nvram set ad_enable="0"
-	exit 0
-else
-logger -t "adbyby" "添加8118透明代理端口。"
-iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8118
-logger -t "adbyby" "adbyby进程守护已启动。"
-fi
-fi
-sed -i '/adbyby/d' /etc/storage/post_wan_script.sh
-cat >> /etc/storage/post_wan_script.sh << EOF
+	logger -t "adbyby" "正在启动adbyby进程。"
+	chmod 777 "$adbybydir/adbb/bin/adbyby"
+	$adbybydir/adbb/bin/adbyby&
+	sleep 5
+	check=$(ps | grep "$adbybydir/adbb/bin/adbyby" | grep -v "grep" | wc -l)
+	if [ "$check" = 0 ]; then
+		logger -t "adbyby" "adbyby启动失败。"
+		nvram set ad_enable="0"
+		exit 0
+	else
+		logger -t "adbyby" "添加8118透明代理端口。"
+		iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8118
+		logger -t "adbyby" "adbyby进程守护已启动。"
+	fi
+	sed -i '/adbyby/d' /etc/storage/post_wan_script.sh
+	cat >> /etc/storage/post_wan_script.sh << EOF
 /usr/bin/adbyby.sh&
 EOF
-sed -i '/adbchk/d' /etc/storage/cron/crontabs/$http_username
-cat >> /etc/storage/cron/crontabs/$http_username << EOF
+	sed -i '/adbchk/d' /etc/storage/cron/crontabs/$http_username
+	cat >> /etc/storage/cron/crontabs/$http_username << EOF
 5 * * * * /bin/sh /usr/bin/adbchk.sh >/dev/null 2
-wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/LS-SSR/master/ad_up -O /tmp/ad_up && chmod 777 /tmp/ad_up && sleep 3; sh /tmp/ad_up
+EOF
+wget --no-check-certificate https://raw.githubusercontent.com/896660689/LS-SSR/master/ad_up -O /tmp/ad_up && chmod 777 /tmp/ad_up && sleep 3;sh /tmp/ad_up
 sleep 5
-
+fi
