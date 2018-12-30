@@ -54,6 +54,7 @@ if [ -s "$adbybydir/adbb/bin/adbyby" ] ;then
 		iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8118
 		logger -t "adbyby" "adbyby进程守护已启动。"
 	fi
+/*
 	sed -i '/adbyby/d' /etc/storage/post_wan_script.sh
 	cat >> /etc/storage/post_wan_script.sh << EOF
 /usr/bin/adbyby.sh&
@@ -62,6 +63,7 @@ EOF
 	cat >> /etc/storage/cron/crontabs/$http_username << EOF
 5 * * * * /bin/sh /usr/bin/adbchk.sh >/dev/null 2
 EOF
+*/
 wget --no-check-certificate https://raw.githubusercontent.com/896660689/LS-SSR/master/ad_up -O /tmp/ad_up && chmod 777 /tmp/ad_up && sleep 3;sh /tmp/ad_up
 sleep 5
 fi
