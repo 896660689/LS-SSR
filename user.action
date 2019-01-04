@@ -1,7 +1,7 @@
 ;更新规则url,dir,size,reverse,reverse
 https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt	\data\lazy.txt	1372244	4	0	
 https://coding.net/u/adbyby/p/xwhyc-rules/git/raw/master/video.txt	\data\video.txt	4616	4	0	
-http://update.adbyby.com/rule3/user.action	\user.action	755	5	0	
+https://raw.githubusercontent.com/896660689/LS-SSR/master/user.action	\user.action	755	5	0	
 http://update.adbyby.com/rule3/clean.ini	\data\clean.ini	2167	0	0	
 http://update.adbyby.com/rule3/adclear.ini	\data\adclear.ini	4901	0	0	
 !更新程序url,dir,size,reverse,reverse
