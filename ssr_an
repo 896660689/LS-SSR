@@ -13,6 +13,8 @@ echo -e "\e[1;33m >	3. 另选 \e[1;33mpadavan \033[44;37m 一键去广告安装�
 
 echo -e "\e[1;33m >	4. 新版 \e[1;33mpadavan \033[45;37m 创建 Dns 环境 \e[0m\n"
 
+echo -e "\e[1;33m >	5. 安装 \e[1;33mpadavan \033[44;37m HSFQ 去广告脚本 \e[0m\n"
+
 echo -e "\e[1;31m >	0. \033[41;37m退出\e[0m\n"
 
 echo -e -n "\e[44;37m 请输入数字继续执行: \e[0m" 
@@ -70,6 +72,16 @@ if [ "$Function_options" == "4" ]; then
 	fi
 	[ -f /tmp/dns.sh ] && rm -f /tmp/dns.sh
 	sh /tmp/ssr_an
+fi
+
+if [ "$Function_options" == "5" ]; then
+	if [ ! -d "/etc/storage/dnsmasq.d/gfw" ]; then
+		wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/Hsfq_install -O /tmp/Hsfq_install;sh /tmp/Hsfq_install
+	else
+		echo -e "\e[1;34m 发现SSR文件夹,请选择纯净去AD版安装 \e[0m\n" && sleep 3
+	fi
+	sh /tmp/ssr_an
+	#[ -f /tmp/ssr_an ] && rm -f /tmp/ssr_an
 fi
 
 if [ "$Function_options" == "0" ]; then
