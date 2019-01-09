@@ -36,8 +36,8 @@ else
 	if [ $? -eq 0 ]; then
 		sed -i '/127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/log/d' /etc/storage/dnsmasq/dnsmasq.conf
-		sed -i '/3600/d' /etc/storage/dnsmasq/dnsmasq.conf
-		sed -i '/conf-dir/d' /etc/storage/dnsmasq/dnsmasq.conf
+		#sed -i '/3600/d' /etc/storage/dnsmasq/dnsmasq.conf
+		#sed -i '/conf-dir/d' /etc/storage/dnsmasq/dnsmasq.conf
 	else
 		echo -e "\033[41;37m 开始写入启动代码 \e[0m\n"
 		echo "listen-address=${route_vlan},127.0.0.1
@@ -48,10 +48,10 @@ log-facility=/var/log/dnsmasq.log
 # 异步log,缓解阻塞，提高性能。默认为5，最大为100
 log-async=50
 # 缓存最长时间
-min-cache-ttl=3600
+##  min-cache-ttl=3600
 # 指定服务器'域名''地址'文件夹
 #conf-dir=/etc/storage/dnsmasq.d/conf
-conf-dir=/etc/storage/gfwlist
+##  conf-dir=/etc/storage/gfwlist
 # conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf" >> /tmp/tmp_dnsmasq.conf
 		cat /tmp/tmp_dnsmasq.conf | sed -E -e "/#/d" >> /etc/storage/dnsmasq/dnsmasq.conf;sleep 3
 		rm /tmp/tmp_dnsmasq.conf
