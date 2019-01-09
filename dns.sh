@@ -36,7 +36,7 @@ else
 	if [ $? -eq 0 ]; then
 		sed -i '/127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/log/d' /etc/storage/dnsmasq/dnsmasq.conf
-		sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf
+		sed -i '/3600/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/conf-dir/d' /etc/storage/dnsmasq/dnsmasq.conf
 	else
 		echo -e "\033[41;37m 开始写入启动代码 \e[0m\n"
@@ -48,7 +48,7 @@ log-facility=/var/log/dnsmasq.log
 # 异步log,缓解阻塞，提高性能。默认为5，最大为100
 log-async=50
 # 缓存最长时间
-min-cache-ttl=1800
+min-cache-ttl=3600
 # 指定服务器'域名''地址'文件夹
 #conf-dir=/etc/storage/dnsmasq.d/conf
 conf-dir=/etc/storage/gfwlist
@@ -73,4 +73,3 @@ if [ -f "/etc/storage/post_iptables_script.sh" ]; then
 	sed -i '$a sed -i "/#/d" /tmp/resolv.conf;mv -f /tmp/resolv.conf /etc/resolv.conf' /etc/storage/post_iptables_script.sh
 	sed -i '$a restart_dhcpd' /etc/storage/post_iptables_script.sh
 fi
-
