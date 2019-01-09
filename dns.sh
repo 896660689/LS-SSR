@@ -32,7 +32,7 @@ if [ ! -f "/etc/storage/dnsmasq/dnsmasq.conf" ]; then
 	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_dnsmasq -qO /tmp/tmp_dnsmasq
 	chmod 777 /tmp/tmp_dnsmasq && sh /tmp/tmp_dnsmasq
 else
-	grep "conf-dir" /etc/storage/dnsmasq/dnsmasq.conf
+	grep "127.0.0.1" /etc/storage/dnsmasq/dnsmasq.conf
 	if [ $? -eq 0 ]; then
 		sed -i '/127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/log/d' /etc/storage/dnsmasq/dnsmasq.conf
