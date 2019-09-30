@@ -1,5 +1,5 @@
 #!/bin/sh
-## Adaptation Grassland in Lucheng 2018.12.08
+## Adaptation Grassland in Lucheng 2019.10.01
 
 echo -e "*****************************************************"
 echo -e "\e[1;31m     SSR 安装脚本 \e[0m"
@@ -54,10 +54,10 @@ fi
 if [ "$Function_options" == "3" ]; then
 	if [ ! -d "/etc/storage/dnsmasq.d/gfw" ]; then
 		#wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/Hsfq_install -O /tmp/Hsfq_install;sh /tmp/Hsfq_install
-		wget --no-check-certificate https://raw.githubusercontent.com/896660689/AD/master/Ad_Install -O /tmp/Hsfq_install;sh /tmp/Hsfq_install
+		wget --no-check-certificate https://raw.githubusercontent.com/896660689/AD/master/Ad_Install -O /tmp/Ad_Install;sh /tmp/Ad_Install
 	else
 		echo -e "\e[1;34m 发现SSR文件夹,请选择纯净去AD版安装 \e[0m\n" && sleep 3
-		wget --no-check-certificate https://raw.githubusercontent.com/896660689/AD/master/Ad_Install -O /tmp/Hsfq_install;sh /tmp/Hsfq_install
+		wget --no-check-certificate https://raw.githubusercontent.com/896660689/AD/master/Ad_Install -O /tmp/Ad_Install;sh /tmp/Ad_Install
 	fi
 	sh /tmp/ssr_an
 	#[ -f /tmp/ssr_an ] && rm -f /tmp/ssr_an
